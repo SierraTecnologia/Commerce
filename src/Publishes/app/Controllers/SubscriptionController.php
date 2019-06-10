@@ -29,12 +29,12 @@ class SubscriptionController extends Controller
      */
     public function subscribe($id)
     {
-        if (is_null(auth()->user()->meta->stripe_id)) {
+        if (is_null(auth()->user()->meta->sitecpayment_id)) {
             return redirect('store/account/card');
         }
 
         $plan = $this->service->find(Crypto::decrypt($id));
-        auth()->user()->meta->newSubscription($plan->subscription_name, $plan->stripe_name)->create();
+        auth()->user()->meta->newSubscription($plan->subscription_name, $plan->sitecpayment_name)->create();
 
         app(LogisticService::class)->afterSubscription(auth()->user(), $plan);
 
@@ -79,7 +79,7 @@ class SubscriptionController extends Controller
     {
         auth()->user()->meta->subscriptions()
             ->where('name', Crypto::decrypt($name))
-            ->where('sitecpayment_id', Crypto::decrypt($request->stripe_id))->first()->cancel();
+            ->where('sitecpayment_id', Crypto::decrypt($request->sitecpayment_id))->first()->cancel();
 
         app(LogisticService::class)->cancelSubscription(auth()->user(), Crypto::decrypt($name));
 

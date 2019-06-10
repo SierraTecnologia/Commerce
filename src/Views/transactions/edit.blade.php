@@ -39,7 +39,7 @@
         <div class="row">
             <div class="col-md-6">
                 @if ($order && $order->items->isNotEmpty())
-                    <table class="table table-striped">
+                    <table class="table table-sitecpaymentd">
                         <thead>
                             <th>Name</th>
                             <th>Quantity</th>
@@ -56,7 +56,7 @@
                         </tbody>
                     </table>
                 @endif
-                <table class="table table-striped">
+                <table class="table table-sitecpaymentd">
                     <tr>
                         <td><b>Subtotal</b></td>
                         <td class="text-right">${{ $transaction->subtotal }}</td>
@@ -131,7 +131,7 @@
                 <div class="well text-center">
                     <span class="lead">Refunds</span>
                 </div>
-                <table class="table table-striped">
+                <table class="table table-sitecpaymentd">
                     <tr>
                         <th>Item</th>
                         <th>Amount</th>

@@ -12,7 +12,7 @@
                 @if ($plans->isEmpty())
                     @include('cms::layouts.module-search', [ 'module' => 'plans' ])
                 @else
-                    <table class="table table-striped">
+                    <table class="table table-sitecpaymentd">
                         <thead>
                             <th>Name</th>
                             <th>Enabled</th>

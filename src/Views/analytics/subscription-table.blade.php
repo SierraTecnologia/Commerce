@@ -1,4 +1,4 @@
-<table class="table table-striped">
+<table class="table table-sitecpaymentd">
     <thead>
         <tr>
             <th>Plan</th>

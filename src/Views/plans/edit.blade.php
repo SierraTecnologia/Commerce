@@ -59,7 +59,7 @@
                         <span>You have no subscribers yet! Start selling :)</span>
                     </div>
                 @else
-                    <table class="table table-striped">
+                    <table class="table table-sitecpaymentd">
                         <tr>
                             <th>Customer</th>
                             <th>Active Since</th>
@@ -69,10 +69,10 @@
                         @foreach($customers as $customer)
                             <tr>
                                 <td><a href="{{ url('admin/users/'.$customer->user()->id.'/edit') }}">{{ $customer->user()->name }}</a></td>
-                                <td>{{ $customer->subscription($plan->stripe_name)->created_at }}</td>
-                                <td>{{ $customer->subscription($plan->stripe_name)->ends_at or 'N/A' }}</td>
+                                <td>{{ $customer->subscription($plan->sitecpayment_name)->created_at }}</td>
+                                <td>{{ $customer->subscription($plan->sitecpayment_name)->ends_at or 'N/A' }}</td>
                                 <td>
-                                    @if (is_null($customer->subscription($plan->stripe_name)->ends_at))
+                                    @if (is_null($customer->subscription($plan->sitecpayment_name)->ends_at))
                                         <form class="cancel-form" method="post" action="{!! url('cms/plans/'.$plan->id.'/cancel-subscription/'.$customer->id) !!}">
                                             {!! csrf_field() !!}
                                             {!! method_field('DELETE') !!}

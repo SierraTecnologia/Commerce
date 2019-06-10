@@ -36,8 +36,8 @@
 @endsection
 
 @section('pre-javascript')
-    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-    <script> Stripe.setPublishableKey('{{ Config::get("services.stripe.key") }}'); </script>
+    <script type="text/javascript" src="https://js.sitecpayment.com/v2/"></script>
+    <script> SierraTecnologia.setPublishableKey('{{ Config::get("services.sitecpayment.key") }}'); </script>
 @stop
 
 @section('javascript')

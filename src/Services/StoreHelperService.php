@@ -33,12 +33,12 @@ class StoreHelperService
 
     public function subscriptionPlan($subscription)
     {
-        return app(Plan::class)->getPlansByStripeId($subscription->stripe_plan);
+        return app(Plan::class)->getPlansBySierraTecnologiaId($subscription->sitecpayment_plan);
     }
 
     public function subscriptionUpcoming($subscription)
     {
-        $key = $subscription->stripe_id.'__'.auth()->id();
+        $key = $subscription->sitecpayment_id.'__'.auth()->id();
 
         if (!Cache::has($key)) {
             $invoice = auth()->user()->meta->upcomingInvoice($subscription->name);
@@ -63,7 +63,7 @@ class StoreHelperService
     {
         return '<form method="post" action="'.$this->storeUrl('/account/subscription/'.crypto_encrypt($subscription->name)).'/cancel">'
         .csrf_field()
-        .'<input type="hidden" name="stripe_id" value="'.crypto_encrypt($subscription->stripe_id).'">'
+        .'<input type="hidden" name="sitecpayment_id" value="'.crypto_encrypt($subscription->sitecpayment_id).'">'
         .'<button class="'.$class.'">'.$buttonContent.'</button></form>';
     }
 

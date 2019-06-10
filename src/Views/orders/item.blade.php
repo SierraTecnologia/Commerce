@@ -34,7 +34,7 @@
 
         <div class="row">
             <div class="col-md-6 raw-margin-bottom-24">
-                <table class="table table-striped">
+                <table class="table table-sitecpaymentd">
                     <tbody>
                         <tr>
                             <th>Product</th>
@@ -60,7 +60,7 @@
                 </table>
             </div>
             <div class="col-md-6 raw-margin-bottom-24">
-                <table class="table table-striped">
+                <table class="table table-sitecpaymentd">
                     <tbody>
                         <tr>
                             <th>Subtotal</th>
@@ -95,7 +95,7 @@
                             Refunded
                         </span>
                     </div>
-                    <table class="table table-striped raw-margin-top-24">
+                    <table class="table table-sitecpaymentd raw-margin-top-24">
                         <tr>
                             <th>Amount</th>
                             <th class="text-right">Date</th>

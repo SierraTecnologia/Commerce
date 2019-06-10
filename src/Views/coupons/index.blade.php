@@ -12,7 +12,7 @@
                 @if ($coupons->isEmpty())
                     @include('cms::layouts.module-search', [ 'module' => 'coupons' ])
                 @else
-                    <table class="table table-striped">
+                    <table class="table table-sitecpaymentd">
                         <thead>
                             <th>Name</th>
                             <th>Expired</th>

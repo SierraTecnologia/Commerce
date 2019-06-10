@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use SierraTecnologia\Commerce\Services\StripeService;
+use SierraTecnologia\Commerce\Services\SierraTecnologiaService;
 
-class StripeServiceTest extends TestCase
+class SierraTecnologiaServiceTest extends TestCase
 {
     use DatabaseMigrations;
 
@@ -11,16 +11,16 @@ class StripeServiceTest extends TestCase
     {
         parent::setUp();
 
-        $stripe = Mockery::mock(\Stripe\Stripe::class);
-        $plan = Mockery::mock(\Stripe\Plan::class);
-        $refund = Mockery::mock(\Stripe\Refund::class);
-        $coupon = Mockery::mock(\Stripe\Coupon::class);
+        $sitecpayment = Mockery::mock(\SierraTecnologia\SierraTecnologia::class);
+        $plan = Mockery::mock(\SierraTecnologia\Plan::class);
+        $refund = Mockery::mock(\SierraTecnologia\Refund::class);
+        $coupon = Mockery::mock(\SierraTecnologia\Coupon::class);
         $this->transaction = factory(\SierraTecnologia\Commerce\Models\Transaction::class)->create();
 
         $planObject = Mockery::mock('StdClass');
         $planObject->shouldReceive('delete')->andReturn(true);
 
-        $stripe->shouldReceive('setApiKey')->andReturn(true);
+        $sitecpayment->shouldReceive('setApiKey')->andReturn(true);
         $plan->shouldReceive('all')->andReturn([]);
         $plan->shouldReceive('create')->andReturn(true);
         $plan->shouldReceive('retrieve')->andReturn($planObject);
@@ -31,12 +31,12 @@ class StripeServiceTest extends TestCase
             'amount' => $this->transaction->amount
         ])->andReturn(true);
 
-        $this->service = new StripeService($stripe, $plan, $coupon, $refund);
+        $this->service = new SierraTecnologiaService($sitecpayment, $plan, $coupon, $refund);
     }
 
-    public function testGetStripePlans()
+    public function testGetSierraTecnologiaPlans()
     {
-        $response = $this->service->collectStripePlans();
+        $response = $this->service->collectSierraTecnologiaPlans();
         $this->assertEquals($response, []);
     }
 

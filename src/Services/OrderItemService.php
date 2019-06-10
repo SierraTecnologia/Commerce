@@ -3,7 +3,7 @@
 namespace SierraTecnologia\Commerce\Services;
 
 use Carbon\Carbon;
-use Stripe\Error\InvalidRequest;
+use SierraTecnologia\Error\InvalidRequest;
 use SierraTecnologia\Crypto\Services\Crypto;
 use SierraTecnologia\Commerce\Models\Refund;
 use SierraTecnologia\Commerce\Repositories\OrderItemRepository;
@@ -145,7 +145,7 @@ class OrderItemService
                     'provider_id' => $refund->id,
                     'uuid' => Crypto::uuid(),
                     'amount' => ($refund->amount * 0.01),
-                    'provider' => 'Stripe',
+                    'provider' => 'SierraTecnologia',
                     'charge' => $refund->charge,
                     'currency' => $refund->currency,
                 ]);

@@ -22,7 +22,7 @@
 
 <div class="row raw-margin-bottom-24">
     <div class="col-md-12">
-        <table class="table table-striped">
+        <table class="table table-sitecpaymentd">
             <thead>
                 <th>Key</th>
                 <th>Value</th>

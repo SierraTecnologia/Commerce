@@ -122,7 +122,7 @@ class OrderService
                         'provider_id' => $refund->id,
                         'uuid' => Crypto::uuid(),
                         'amount' => $refund->amount,
-                        'provider' => 'Stripe',
+                        'provider' => 'SierraTecnologia',
                         'charge' => $refund->charge,
                         'currency' => $refund->currency,
                     ]);

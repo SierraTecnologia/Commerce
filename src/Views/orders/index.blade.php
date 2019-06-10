@@ -12,7 +12,7 @@
                 @if ($orders->isEmpty())
                     @include('cms::layouts.module-search', [ 'module' => 'orders' ])
                 @else
-                    <table class="table table-striped">
+                    <table class="table table-sitecpaymentd">
                         <thead>
                             <th>Order ID</th>
                             <th class="m-hidden">Transaction ID</th>

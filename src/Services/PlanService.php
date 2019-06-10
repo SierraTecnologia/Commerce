@@ -14,11 +14,11 @@ class PlanService
 {
     public function __construct(
         Plan $plan,
-        StripeService $stripeService,
+        SierraTecnologiaService $sitecpaymentService,
         UserService $userService
     ) {
         $this->model = $plan;
-        $this->stripeService = $stripeService;
+        $this->sitecpaymentService = $sitecpaymentService;
         $this->userService = $userService;
     }
 
@@ -47,9 +47,9 @@ class PlanService
      */
     public function collectNewPlans()
     {
-        $stripePlans = $this->stripeService->collectStripePlans()->data;
-        foreach ($stripePlans as $plan) {
-            $localPlan = $this->model->getPlansByStripeId($plan->id);
+        $sitecpaymentPlans = $this->sitecpaymentService->collectSierraTecnologiaPlans()->data;
+        foreach ($sitecpaymentPlans as $plan) {
+            $localPlan = $this->model->getPlansBySierraTecnologiaId($plan->id);
 
             if (!$localPlan) {
                 $this->model->create([
@@ -114,7 +114,7 @@ class PlanService
             $payload['sitecpayment_name'] = $name;
             $payload['subscription_name'] = $name;
 
-            $this->stripeService->createPlan($payload);
+            $this->sitecpaymentService->createPlan($payload);
 
             return $this->model->create($payload);
         } catch (Exception $e) {
@@ -150,15 +150,15 @@ class PlanService
     }
 
     /**
-     * Get plans by stripe ID.
+     * Get plans by sitecpayment ID.
      *
      * @param int $id
      *
      * @return Plan
      */
-    public function getPlansByStripeId($id)
+    public function getPlansBySierraTecnologiaId($id)
     {
-        return $this->model->getPlansByStripeId($id);
+        return $this->model->getPlansBySierraTecnologiaId($id);
     }
 
     /**
@@ -217,7 +217,7 @@ class PlanService
     public function getSubscribers($plan)
     {
         $userCollection = collect();
-        $subscriptions = Subscription::where('sitecpayment_plan', $plan->stripe_name)->get();
+        $subscriptions = Subscription::where('sitecpayment_plan', $plan->sitecpayment_name)->get();
 
         foreach ($subscriptions as $subscription) {
             $userCollection->push(UserMeta::find($subscription->user_meta_id));
@@ -255,8 +255,8 @@ class PlanService
             $localPlan = $this->model->find($id);
 
             try {
-                $planIsDeleted = $this->stripeService->deletePlan($localPlan->stripe_name);
-            } catch (\Stripe\Error\InvalidRequest $e) {
+                $planIsDeleted = $this->sitecpaymentService->deletePlan($localPlan->sitecpayment_name);
+            } catch (\SierraTecnologia\Error\InvalidRequest $e) {
                 $localPlan->delete();
 
                 return true;
@@ -264,7 +264,7 @@ class PlanService
 
             // We need to unaubscribe our users
             if ($planIsDeleted) {
-                $subscriptions = Subscription::where('sitecpayment_plan', $localPlan->stripe_name)->get();
+                $subscriptions = Subscription::where('sitecpayment_plan', $localPlan->sitecpayment_name)->get();
                 foreach ($subscriptions as $subscription) {
                     $user = UserMeta::find($subscription->user_meta_id);
                     $meta->subscription($localPlan->subscription_name)->cancel();

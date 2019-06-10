@@ -42,7 +42,7 @@
 
             <div class="row">
                 <div class="col-md-6">
-                    <table class="table table-striped">
+                    <table class="table table-sitecpaymentd">
                         <tr>
                             <th>Name</th>
                             <th>Quantity</th>
@@ -64,7 +64,7 @@
                     </table>
                 </div>
                 <div class="col-md-6">
-                    <table class="table table-striped">
+                    <table class="table table-sitecpaymentd">
                         @foreach(json_decode($order->shipping_address) as $address => $detail)
                         <tr>
                             <td>{{ ucfirst($address) }}</td>

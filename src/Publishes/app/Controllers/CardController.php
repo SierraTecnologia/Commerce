@@ -22,7 +22,7 @@ class CardController extends Controller
      */
     public function getCard()
     {
-        if (is_null(auth()->user()->meta->stripe_id)) {
+        if (is_null(auth()->user()->meta->sitecpayment_id)) {
             return view('commerce-frontend::profile.card.set');
         }
 
@@ -50,8 +50,8 @@ class CardController extends Controller
     {
         $user = auth()->user();
 
-        if (is_null($user->meta->stripe_id) && $request->input('sitecpaymentToken')) {
-            $user->meta->createAsStripeCustomer($request->input('sitecpaymentToken'));
+        if (is_null($user->meta->sitecpayment_id) && $request->input('sitecpaymentToken')) {
+            $user->meta->createAsSierraTecnologiaCustomer($request->input('sitecpaymentToken'));
         } elseif ($request->input('sitecpaymentToken')) {
             $user->meta->updateCard($request->input('sitecpaymentToken'));
         }

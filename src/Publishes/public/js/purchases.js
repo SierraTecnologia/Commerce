@@ -32,13 +32,13 @@ $(function(){
             $('#exp_month').val(_month);
             $('#exp_year').val(_year);
 
-            Stripe.card.createToken($form, stripeResponseHandler);
+            SierraTecnologia.card.createToken($form, sitecpaymentResponseHandler);
 
             return false;
         });
     });
 
-    var stripeResponseHandler = function(status, response) {
+    var sitecpaymentResponseHandler = function(status, response) {
         var $form = $('#userPayment');
 
         if (response.error) {
@@ -46,7 +46,7 @@ $(function(){
             $form.find('button').prop('disabled', false);
         } else {
             var token = response.id;
-            $form.append($('<input type="hidden" name="stripeToken" />').val(token));
+            $form.append($('<input type="hidden" name="sitecpaymentToken" />').val(token));
             $form.get(0).submit();
         }
     };

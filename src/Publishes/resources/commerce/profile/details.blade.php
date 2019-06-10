@@ -43,7 +43,7 @@
         </div>
         <div class="col-md-6">
             <h2>Current Address</h2>
-            <table class="table table-striped">
+            <table class="table table-sitecpaymentd">
                 <tr>
                     <td>Shipping Address</td>
                     <td>

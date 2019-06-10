@@ -300,7 +300,7 @@ class CartService
             $code = Session::get('coupon_code');
         }
 
-        $coupon = app(CouponService::class)->findByStripeId($code);
+        $coupon = app(CouponService::class)->findBySierraTecnologiaId($code);
 
         if ($coupon) {
             if ($coupon->discount_type == 'dollar') {

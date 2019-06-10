@@ -20,24 +20,24 @@
 
             <form id="userPayment" method="post" action="{{ route('commerce.process') }}">
                 {!! csrf_field() !!}
-                <input id="exp_month" type="hidden" name="exp_month" data-stripe="exp-month" />
-                <input id="exp_year" type="hidden" name="exp_year" data-stripe="exp-year"/>
+                <input id="exp_month" type="hidden" name="exp_month" data-sitecpayment="exp-month" />
+                <input id="exp_year" type="hidden" name="exp_year" data-sitecpayment="exp-year"/>
                 <div class="row">
                     <div class="col-md-12">
                         <label for="number">Card Number</label>
-                        <input id="number" required type="text" name="number" class="form-control" placeholder="Card Number" data-stripe="number">
+                        <input id="number" required type="text" name="number" class="form-control" placeholder="Card Number" data-sitecpayment="number">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <label for="name">Full Name</label>
-                        <input id="name" required type="text" name="name" class="form-control" placeholder="Full Name" data-stripe="name">
+                        <input id="name" required type="text" name="name" class="form-control" placeholder="Full Name" data-sitecpayment="name">
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label for="cvc">CVV</label>
-                        <input id="cvc" required type="text" name="cvc" class="form-control" placeholder="CVV" data-stripe="cvc">
+                        <input id="cvc" required type="text" name="cvc" class="form-control" placeholder="CVV" data-sitecpayment="cvc">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="cvc">Expiry</label>
@@ -60,8 +60,8 @@
 @stop
 
 @section('pre-javascript')
-    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-    <script> Stripe.setPublishableKey('{{ config("services.stripe.key") }}'); </script>
+    <script type="text/javascript" src="https://js.sitecpayment.com/v2/"></script>
+    <script> SierraTecnologia.setPublishableKey('{{ config("services.sitecpayment.key") }}'); </script>
 @stop
 
 @section('javascript')

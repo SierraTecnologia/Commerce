@@ -32,7 +32,7 @@ class Coupon extends CmsModel
         'discount_type' => 'required',
     ];
 
-    public function getCouponsByStripeId($id)
+    public function getCouponsBySierraTecnologiaId($id)
     {
         return $this->where('sitecpayment_id', $id)->first();
     }
@@ -50,7 +50,7 @@ class Coupon extends CmsModel
 
     public function getDollarsAttribute()
     {
-        return app(CartService::class)->getCurrentCouponValue($this->stripe_id);
+        return app(CartService::class)->getCurrentCouponValue($this->sitecpayment_id);
     }
 
     public function getValueAttribute()

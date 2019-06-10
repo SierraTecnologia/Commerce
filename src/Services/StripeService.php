@@ -3,20 +3,20 @@
 namespace SierraTecnologia\Commerce\Services;
 
 use Carbon\Carbon;
-use Stripe\Coupon;
-use Stripe\Plan;
-use Stripe\Refund;
-use Stripe\Stripe;
+use SierraTecnologia\Coupon;
+use SierraTecnologia\Plan;
+use SierraTecnologia\Refund;
+use SierraTecnologia\SierraTecnologia;
 
-class StripeService
+class SierraTecnologiaService
 {
-    public function __construct(Stripe $stripe, Plan $plan, Coupon $coupon, Refund $refund)
+    public function __construct(SierraTecnologia $sitecpayment, Plan $plan, Coupon $coupon, Refund $refund)
     {
-        $this->stripe = $stripe;
+        $this->sitecpayment = $sitecpayment;
         $this->plan = $plan;
         $this->coupon = $coupon;
         $this->refund = $refund;
-        $this->stripe->setApiKey(config('services.stripe.secret'));
+        $this->sitecpayment->setApiKey(config('services.sitecpayment.secret'));
     }
 
     /*
@@ -26,11 +26,11 @@ class StripeService
     */
 
     /**
-     * Collect the stripe plans.
+     * Collect the sitecpayment plans.
      *
      * @return array
      */
-    public function collectStripePlans()
+    public function collectSierraTecnologiaPlans()
     {
         return $this->plan->all();
     }
@@ -76,11 +76,11 @@ class StripeService
     */
 
     /**
-     * Collect the stripe plans.
+     * Collect the sitecpayment plans.
      *
      * @return array
      */
-    public function collectStripeCoupons()
+    public function collectSierraTecnologiaCoupons()
     {
         return $this->coupon->all();
     }

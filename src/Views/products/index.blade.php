@@ -14,7 +14,7 @@
                 @if ($products->count() === 0)
                     @include('cms::layouts.module-search', [ 'module' => 'products' ])
                 @else
-                    <table class="table table-striped">
+                    <table class="table table-sitecpaymentd">
                         <thead>
                             <th>{!! sortable('Name', 'name') !!}</th>
                             <th class="m-hidden">{!! sortable('Code', 'code') !!}</th>

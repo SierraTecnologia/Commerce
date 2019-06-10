@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use SierraTecnologia\Commerce\Services\StripeService;
+use SierraTecnologia\Commerce\Services\SierraTecnologiaService;
 
 class SubscriptionsTest extends TestCase
 {
@@ -28,15 +28,15 @@ class SubscriptionsTest extends TestCase
         factory(\SierraTecnologia\Commerce\Models\Plan::class)->create(['id' => 3]);
         factory(\SierraTecnologia\Commerce\Models\Plan::class)->create(['id' => 4]);
 
-        $stripe = Mockery::mock(\Stripe\Stripe::class);
-        $plan = Mockery::mock(\Stripe\Plan::class);
-        $refund = Mockery::mock(\Stripe\Refund::class);
-        $coupon = Mockery::mock(\Stripe\Coupon::class);
+        $sitecpayment = Mockery::mock(\SierraTecnologia\SierraTecnologia::class);
+        $plan = Mockery::mock(\SierraTecnologia\Plan::class);
+        $refund = Mockery::mock(\SierraTecnologia\Refund::class);
+        $coupon = Mockery::mock(\SierraTecnologia\Coupon::class);
 
         $planObject = Mockery::mock('StdClass');
         $planObject->shouldReceive('delete')->andReturn(true);
 
-        $stripe->shouldReceive('setApiKey')->andReturn(true);
+        $sitecpayment->shouldReceive('setApiKey')->andReturn(true);
         $plan->shouldReceive('all')->andReturn((object) ['data' => []]);
         $plan->shouldReceive('create')->andReturn(true);
         $plan->shouldReceive('retrieve')->andReturn($planObject);
@@ -44,8 +44,8 @@ class SubscriptionsTest extends TestCase
 
         $refund->shouldReceive('create')->with(['charge' => 999])->andReturn(true);
 
-        app()->bind(StripeService::class, function ($app) use ($stripe, $plan, $coupon, $refund) {
-            return new StripeService($stripe, $plan, $coupon, $refund);
+        app()->bind(SierraTecnologiaService::class, function ($app) use ($sitecpayment, $plan, $coupon, $refund) {
+            return new SierraTecnologiaService($sitecpayment, $plan, $coupon, $refund);
         });
     }
 

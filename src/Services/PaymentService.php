@@ -37,19 +37,19 @@ class PaymentService
     /**
      * Make a purchase.
      *
-     * @param string $stripeToken
+     * @param string $sitecpaymentToken
      * @param Cart   $cart
      *
      * @return mixed
      */
-    public function purchase($stripeToken, $cart)
+    public function purchase($sitecpaymentToken, $cart)
     {
         $user = auth()->user();
 
-        if (is_null($user->meta->stripe_id) && $stripeToken) {
-            $user->meta->createAsStripeCustomer($stripeToken);
-        } else if ($stripeToken) {
-            $user->meta->updateCard($stripeToken);
+        if (is_null($user->meta->sitecpayment_id) && $sitecpaymentToken) {
+            $user->meta->createAsSierraTecnologiaCustomer($sitecpaymentToken);
+        } else if ($sitecpaymentToken) {
+            $user->meta->updateCard($sitecpaymentToken);
         }
 
         DB::beginTransaction();

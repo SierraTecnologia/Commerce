@@ -15,11 +15,11 @@ class CouponService
 {
     public function __construct(
         Coupon $coupon,
-        StripeService $stripeService,
+        SierraTecnologiaService $sitecpaymentService,
         UserService $userService
     ) {
         $this->model = $coupon;
-        $this->stripeService = $stripeService;
+        $this->sitecpaymentService = $sitecpaymentService;
         $this->userService = $userService;
     }
 
@@ -48,10 +48,10 @@ class CouponService
      */
     public function collectNewCoupons()
     {
-        $stripeCoupons = $this->stripeService->collectStripeCoupons()->data;
+        $sitecpaymentCoupons = $this->sitecpaymentService->collectSierraTecnologiaCoupons()->data;
 
-        foreach ($stripeCoupons as $coupon) {
-            $localCoupon = $this->model->getCouponsByStripeId($coupon->id);
+        foreach ($sitecpaymentCoupons as $coupon) {
+            $localCoupon = $this->model->getCouponsBySierraTecnologiaId($coupon->id);
 
             if (!$localCoupon) {
                 $endDate = null;
@@ -137,7 +137,7 @@ class CouponService
             }
 
             if ($payload['for_subscriptions']) {
-                $this->stripeService->createCoupon($payload);
+                $this->sitecpaymentService->createCoupon($payload);
             }
 
             return $this->model->create($payload);
@@ -161,13 +161,13 @@ class CouponService
     }
 
     /**
-     * Get coupons by stripe ID.
+     * Get coupons by sitecpayment ID.
      *
      * @param int $id
      *
      * @return Coupon
      */
-    public function findByStripeId($id)
+    public function findBySierraTecnologiaId($id)
     {
         return $this->model->where('sitecpayment_id', $id)->first();
     }
@@ -185,8 +185,8 @@ class CouponService
             $localCoupon = $this->model->find($id);
 
             try {
-                $couponIsDeleted = $this->stripeService->deleteCoupon($localCoupon->stripe_id);
-            } catch (\Stripe\Error\InvalidRequest $e) {
+                $couponIsDeleted = $this->sitecpaymentService->deleteCoupon($localCoupon->sitecpayment_id);
+            } catch (\SierraTecnologia\Error\InvalidRequest $e) {
                 $localCoupon->delete();
 
                 return true;

@@ -37,7 +37,7 @@ class Plan extends CmsModel
         'description' => 'required',
     ];
 
-    public function getPlansByStripeId($name)
+    public function getPlansBySierraTecnologiaId($name)
     {
         return $this->where('sitecpayment_name', $name)->first();
     }

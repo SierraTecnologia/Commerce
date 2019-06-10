@@ -1,4 +1,4 @@
-<table class="table table-striped">
+<table class="table table-sitecpaymentd">
     <thead>
         <th>Transaction ID</th>
         <th class="m-hidden">State</th>

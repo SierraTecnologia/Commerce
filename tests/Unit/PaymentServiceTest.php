@@ -49,17 +49,17 @@ class PaymentServiceTest extends TestCase
                 'id' => 666,
                 'created' => 9999,
         ]);
-        $this->user->meta->shouldReceive('createAsStripeCustomer')
+        $this->user->meta->shouldReceive('createAsSierraTecnologiaCustomer')
             ->with(Mockery::any())
             ->andReturn(true);
         $this->user->meta->shouldReceive('updateCard')
             ->with('foobarZoo')
             ->andReturn(function () {
-                $this->user->meta->stripe_id = 'forbarZoo';
+                $this->user->meta->sitecpayment_id = 'forbarZoo';
             });
     }
 
-    public function testPurchaseWithExistingStripeToken()
+    public function testPurchaseWithExistingSierraTecnologiaToken()
     {
         $response = $this->service->purchase('foobar', $this->cart);
 
@@ -71,7 +71,7 @@ class PaymentServiceTest extends TestCase
         ]);
     }
 
-    public function testPurchaseWithNewStripeToken()
+    public function testPurchaseWithNewSierraTecnologiaToken()
     {
         $response = $this->service->purchase('foobarZoo', $this->cart);
 
@@ -83,7 +83,7 @@ class PaymentServiceTest extends TestCase
         ]);
     }
 
-    public function testPurchaseWithoutStripeToken()
+    public function testPurchaseWithoutSierraTecnologiaToken()
     {
         $this->user->meta->shouldReceive('getAttribute')->with('sitecpayment_id')->andReturn('foobar');
         $response = $this->service->purchase(null, $this->cart);

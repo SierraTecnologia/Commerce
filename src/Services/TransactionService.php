@@ -124,7 +124,7 @@ class TransactionService
     {
         $transaction = $this->repo->findByUUID($uuid);
 
-        $refund = app(StripeService::class)->refund($transaction->provider_id, $amount);
+        $refund = app(SierraTecnologiaService::class)->refund($transaction->provider_id, $amount);
 
         if ($refund) {
             $transaction->update([
