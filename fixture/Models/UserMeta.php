@@ -28,7 +28,7 @@ class UserMeta extends Model
         'terms_and_cond',
         'is_active',
         'activation_token',
-        'stripe_id',
+        'sitecpayment_id',
         'card_brand',
         'card_last_four',
         'shipping_address',

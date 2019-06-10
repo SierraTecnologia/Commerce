@@ -20,7 +20,7 @@ class Plan extends CmsModel
         'interval',
         'currency',
         'enabled',
-        'stripe_name',
+        'sitecpayment_name',
         'trial_days',
         'subscription_name',
         'descriptor',
@@ -39,7 +39,7 @@ class Plan extends CmsModel
 
     public function getPlansByStripeId($name)
     {
-        return $this->where('stripe_name', $name)->first();
+        return $this->where('sitecpayment_name', $name)->first();
     }
 
     public function getFrequencyAttribute()

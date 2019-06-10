@@ -51,7 +51,7 @@ class StripeService
             'currency' => $plan['currency'],
             'statement_descriptor' => $plan['descriptor'],
             'trial_period_days' => $plan['trial_days'],
-            'id' => $plan['stripe_id'],
+            'id' => $plan['sitecpayment_id'],
         ]);
     }
 
@@ -99,7 +99,7 @@ class StripeService
             'max_redemptions' => $coupon['limit'],
             'currency' => $coupon['currency'],
             'duration' => 'once',
-            'id' => $coupon['stripe_id'],
+            'id' => $coupon['sitecpayment_id'],
         ];
 
         if ($coupon['discount_type'] == 'dollar') {

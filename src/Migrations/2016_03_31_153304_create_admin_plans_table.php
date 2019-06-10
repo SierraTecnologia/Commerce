@@ -19,7 +19,7 @@ class CreateAdminPlansTable extends Migration
             $table->string('currency');
             $table->string('descriptor')->nullable();
             $table->integer('trial_days')->default(0);
-            $table->string('stripe_name');
+            $table->string('sitecpayment_name');
             $table->string('subscription_name')->nullable();
             $table->text('description')->nullable();
             $table->boolean('enabled')->default(false);

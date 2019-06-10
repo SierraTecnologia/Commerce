@@ -23,7 +23,7 @@ class Coupon extends CmsModel
         'for_subscriptions',
         'amount',
         'limit',
-        'stripe_id',
+        'sitecpayment_id',
     ];
 
     public static $rules = [
@@ -34,7 +34,7 @@ class Coupon extends CmsModel
 
     public function getCouponsByStripeId($id)
     {
-        return $this->where('stripe_id', $id)->first();
+        return $this->where('sitecpayment_id', $id)->first();
     }
 
     public function expired()

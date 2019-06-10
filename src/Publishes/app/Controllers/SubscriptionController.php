@@ -79,7 +79,7 @@ class SubscriptionController extends Controller
     {
         auth()->user()->meta->subscriptions()
             ->where('name', Crypto::decrypt($name))
-            ->where('stripe_id', Crypto::decrypt($request->stripe_id))->first()->cancel();
+            ->where('sitecpayment_id', Crypto::decrypt($request->stripe_id))->first()->cancel();
 
         app(LogisticService::class)->cancelSubscription(auth()->user(), Crypto::decrypt($name));
 

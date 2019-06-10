@@ -67,7 +67,7 @@ class PaymentService
         if ($result) {
             $transaction = $this->transactionService->create([
                 'uuid' => Crypto::uuid(),
-                'provider' => 'stripe',
+                'provider' => 'sitecpayment',
                 'state' => 'success',
                 'coupon' => $coupon,
                 'subtotal' => $cart->getCartSubTotal(),

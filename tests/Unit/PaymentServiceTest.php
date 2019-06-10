@@ -40,7 +40,7 @@ class PaymentServiceTest extends TestCase
         $this->cart->addToCart(1, 'product', 1, '{}');
 
         $this->user->meta = Mockery::mock(App\Models\UserMeta::class);
-        $this->user->meta->shouldReceive('getAttribute')->with('stripe_id')->andReturn(null);
+        $this->user->meta->shouldReceive('getAttribute')->with('sitecpayment_id')->andReturn(null);
         $this->user->meta->shouldReceive('getAttribute')->with('shipping_address')->andReturn('foobar');
         $this->user->meta->shouldReceive('getAttribute')->with('billing_address')->andReturn('foobar');
         $this->user->meta->shouldReceive('charge')
@@ -85,7 +85,7 @@ class PaymentServiceTest extends TestCase
 
     public function testPurchaseWithoutStripeToken()
     {
-        $this->user->meta->shouldReceive('getAttribute')->with('stripe_id')->andReturn('foobar');
+        $this->user->meta->shouldReceive('getAttribute')->with('sitecpayment_id')->andReturn('foobar');
         $response = $this->service->purchase(null, $this->cart);
 
         $this->assertEquals(get_class($response), 'Illuminate\Http\RedirectResponse');

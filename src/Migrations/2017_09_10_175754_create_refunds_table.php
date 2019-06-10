@@ -16,7 +16,7 @@ class CreateRefundsTable extends Migration
             $table->integer('transaction_id')->default(0);
             $table->string('provider_id');
             $table->string('uuid');
-            $table->string('provider')->default('stripe');
+            $table->string('provider')->default('sitecpayment');
             $table->decimal('amount')->default(0);
             $table->string('charge');
             $table->string('currency');

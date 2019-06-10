@@ -65,7 +65,7 @@ class CouponService
                 }
 
                 $this->model->create([
-                    'stripe_id' => $coupon->id,
+                    'sitecpayment_id' => $coupon->id,
                     'start_date' => Carbon::createFromTimestamp($coupon->created),
                     'end_date' => $endDate,
                     'discount_type' => $discount_type,
@@ -119,7 +119,7 @@ class CouponService
     public function create($payload)
     {
         try {
-            $payload['stripe_id'] = $payload['code'];
+            $payload['sitecpayment_id'] = $payload['code'];
             $payload['currency'] = config('commerce.currency');
 
             if (empty($payload['start_date'])) {
@@ -169,7 +169,7 @@ class CouponService
      */
     public function findByStripeId($id)
     {
-        return $this->model->where('stripe_id', $id)->first();
+        return $this->model->where('sitecpayment_id', $id)->first();
     }
 
     /**

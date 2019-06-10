@@ -11,7 +11,7 @@ $factory->define(\SierraTecnologia\Commerce\Models\Transaction::class, function 
         'id' => 1,
         'uuid' => 'foo-bar-foo-bar',
         'user_id' => 1,
-        'provider' => 'stripe',
+        'provider' => 'sitecpayment',
         'state' => 'success',
         'subtotal' => 99.99,
         'tax' => 0,

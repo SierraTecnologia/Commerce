@@ -49,7 +49,7 @@ class StripeServiceTest extends TestCase
             'currency' => 'cad',
             'descriptor' => 'Hockey',
             'trial_days' => 99,
-            'stripe_id' => 'wayne-gretzky',
+            'sitecpayment_id' => 'wayne-gretzky',
         ]);
 
         $this->assertEquals($response, true);

@@ -16,7 +16,7 @@ $factory->define(\SierraTecnologia\Commerce\Models\Plan::class, function (Faker\
         'interval' => 'monthly',
         'currency' => 'usd',
         'enabled' => true,
-        'stripe_name' => 'cheap-package',
+        'sitecpayment_name' => 'cheap-package',
         'trial_days' => 30,
         'subscription_name' => 'default',
         'descriptor' => 'dumb is dumb',

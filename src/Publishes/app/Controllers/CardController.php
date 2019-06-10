@@ -50,10 +50,10 @@ class CardController extends Controller
     {
         $user = auth()->user();
 
-        if (is_null($user->meta->stripe_id) && $request->input('stripeToken')) {
-            $user->meta->createAsStripeCustomer($request->input('stripeToken'));
-        } elseif ($request->input('stripeToken')) {
-            $user->meta->updateCard($request->input('stripeToken'));
+        if (is_null($user->meta->stripe_id) && $request->input('sitecpaymentToken')) {
+            $user->meta->createAsStripeCustomer($request->input('sitecpaymentToken'));
+        } elseif ($request->input('sitecpaymentToken')) {
+            $user->meta->updateCard($request->input('sitecpaymentToken'));
         }
 
         return redirect('store/account/card')->with('message', 'Successfully set your credit card');

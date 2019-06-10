@@ -58,7 +58,7 @@ class PlanService
                     'price' => $plan->amount,
                     'interval' => $plan->interval,
                     'currency' => $plan->currency,
-                    'stripe_name' => $plan->id,
+                    'sitecpayment_name' => $plan->id,
                     'subscription_name' => $plan->id,
                     'descriptor' => $plan->statement_descriptor,
                     'description' => $plan->statement_descriptor,
@@ -109,9 +109,9 @@ class PlanService
         try {
             $name = app(CmsService::class)->convertToURL($payload['name']);
 
-            $payload['stripe_id'] = $name;
+            $payload['sitecpayment_id'] = $name;
             $payload['uuid'] = crypto_uuid();
-            $payload['stripe_name'] = $name;
+            $payload['sitecpayment_name'] = $name;
             $payload['subscription_name'] = $name;
 
             $this->stripeService->createPlan($payload);
@@ -217,7 +217,7 @@ class PlanService
     public function getSubscribers($plan)
     {
         $userCollection = collect();
-        $subscriptions = Subscription::where('stripe_plan', $plan->stripe_name)->get();
+        $subscriptions = Subscription::where('sitecpayment_plan', $plan->stripe_name)->get();
 
         foreach ($subscriptions as $subscription) {
             $userCollection->push(UserMeta::find($subscription->user_meta_id));
@@ -264,7 +264,7 @@ class PlanService
 
             // We need to unaubscribe our users
             if ($planIsDeleted) {
-                $subscriptions = Subscription::where('stripe_plan', $localPlan->stripe_name)->get();
+                $subscriptions = Subscription::where('sitecpayment_plan', $localPlan->stripe_name)->get();
                 foreach ($subscriptions as $subscription) {
                     $user = UserMeta::find($subscription->user_meta_id);
                     $meta->subscription($localPlan->subscription_name)->cancel();

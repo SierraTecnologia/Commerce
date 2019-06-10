@@ -18,6 +18,6 @@ $factory->define(\SierraTecnologia\Commerce\Models\Coupon::class, function (Fake
         'discount_type' => 'dollar',
         'amount' => 5,
         'limit' => 1,
-        'stripe_id' => 'coupon-A',
+        'sitecpayment_id' => 'coupon-A',
     ];
 });
